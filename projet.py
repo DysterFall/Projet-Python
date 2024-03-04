@@ -23,7 +23,7 @@ class MyStack:
             self.item_2 = item
         elif self.top == 2:
             self.item_3 = item
-
+        
         self.stack_size += 1
 
     def pop_from_stack(self):
@@ -39,7 +39,7 @@ class MyStack:
         elif self.top == 2:
             item = self.item_3
             self.item_3 = None
-        
+        3
         self.top -= 1
         self.stack_size -= 1
         return item
@@ -51,7 +51,8 @@ class MyStack:
         return self.stack_size == 0
 
 if __name__ == '__main__':
-    myStack = MyStack(3)
+    max_size = int(input("Entrez la taille maximale de la pile MyStack: "))
+    myStack = MyStack(max_size)
     myStack.add_to_stack('hello')
     myStack.add_to_stack('hello')
     print(myStack.is_full()) 
