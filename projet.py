@@ -7,28 +7,48 @@ class MyOutOfSizeException(Exception):
 class MyStack:
     def __init__(self, max_size):
         self.max_size = max_size
-        self.stack = [None] * max_size
+        self.stack_size = 0
         self.top = -1
+        self.item_1 = None
+        self.item_2 = None
+        self.item_3 = None  
 
     def add_to_stack(self, item):
         if self.top >= self.max_size - 1:
             raise MyOutOfSizeException("MyOutOfSizeException")
         self.top += 1
-        setattr(self, f'item_{self.top}', item)
+        if self.top == 0:
+            self.item_1 = item
+        elif self.top == 1:
+            self.item_2 = item
+        elif self.top == 2:
+            self.item_3 = item
+
+        self.stack_size += 1
 
     def pop_from_stack(self):
         if self.top == -1:
             raise MyEmptyStackException("MyEmptyStackException")
-        item = getattr(self, f'item_{self.top}')
-        delattr(self, f'item_{self.top}')
+        item = None
+        if self.top == 0:
+            item = self.item_1
+            self.item_1 = None
+        elif self.top == 1:
+            item = self.item_2
+            self.item_2 = None
+        elif self.top == 2:
+            item = self.item_3
+            self.item_3 = None
+        
         self.top -= 1
+        self.stack_size -= 1
         return item
 
     def is_full(self):
-        return self.top >= self.max_size - 1
+        return self.stack_size == self.max_size
 
     def is_empty(self):
-        return self.top == -1
+        return self.stack_size == 0
 
 if __name__ == '__main__':
     myStack = MyStack(3)
