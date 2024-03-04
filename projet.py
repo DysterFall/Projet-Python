@@ -9,40 +9,20 @@ class MyStack:
         self.max_size = max_size
         self.stack_size = 0
         self.top = -1
-        self.item_1 = None
-        self.item_2 = None
-        self.item_3 = None  
+
 
     def add_to_stack(self, item):
         if self.top >= self.max_size - 1:
             raise MyOutOfSizeException("MyOutOfSizeException")
         self.top += 1
-        if self.top == 0:
-            self.item_1 = item
-        elif self.top == 1:
-            self.item_2 = item
-        elif self.top == 2:
-            self.item_3 = item
-        
         self.stack_size += 1
 
     def pop_from_stack(self):
         if self.top == -1:
             raise MyEmptyStackException("MyEmptyStackException")
-        item = None
-        if self.top == 0:
-            item = self.item_1
-            self.item_1 = None
-        elif self.top == 1:
-            item = self.item_2
-            self.item_2 = None
-        elif self.top == 2:
-            item = self.item_3
-            self.item_3 = None
-        3
         self.top -= 1
         self.stack_size -= 1
-        return item
+        return None
 
     def is_full(self):
         return self.stack_size == self.max_size
