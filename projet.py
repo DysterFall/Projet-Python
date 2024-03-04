@@ -4,38 +4,31 @@ class MyEmptyStackException(Exception):
 class MyOutOfSizeException(Exception):
     pass
 
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-
 class MyStack:
     def __init__(self, max_size):
         self.max_size = max_size
-        self.top = None
-        self.size = 0
+        self.stack = [None] * max_size
+        self.top = -1
 
     def add_to_stack(self, item):
-        if self.size >= self.max_size:
+        if self.top >= self.max_size - 1:
             raise MyOutOfSizeException("MyOutOfSizeException")
-        new_node = Node(item)
-        new_node.next = self.top
-        self.top = new_node
-        self.size += 1
+        self.top += 1
+        setattr(self, f'item_{self.top}', item)
 
     def pop_from_stack(self):
-        if self.size == 0:
+        if self.top == -1:
             raise MyEmptyStackException("MyEmptyStackException")
-        item = self.top.value
-        self.top = self.top.next
-        self.size -= 1
+        item = getattr(self, f'item_{self.top}')
+        delattr(self, f'item_{self.top}')
+        self.top -= 1
         return item
 
     def is_full(self):
-        return self.size >= self.max_size
+        return self.top >= self.max_size - 1
 
     def is_empty(self):
-        return self.size == 0
+        return self.top == -1
 
 if __name__ == '__main__':
     myStack = MyStack(3)
